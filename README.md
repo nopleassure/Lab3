@@ -106,7 +106,7 @@ void editRecord(Cargo* arr, int count) {
 }
 ```
 
-Функция "Вычисления"
+4. Функция "Вычисления"
 ```
 void calcstats(const Cargo* arr, int count) {
     double total_weight = 0.0;
@@ -129,7 +129,7 @@ void calcstats(const Cargo* arr, int count) {
     cout << "-----------------------------\n";
 }
 ```
-4. Функция “Сохранение данных в новом файле”
+5. Функция “Сохранение данных в новом файле”
 
 ```
 void saveToFile(const Cargo* arr, int count)
@@ -156,7 +156,7 @@ void saveToFile(const Cargo* arr, int count)
 }
 ```
 
-5. Файл "newfile2.txt" *не очень поняла, что за файл, выписала, который был уже изменен с помощью программы main
+6. Файл "newfile2.txt" *не очень поняла, что за файл, выписала, который был уже изменен с помощью программы main
 
 <img width="1546" height="1601" alt="изображение" src="https://github.com/user-attachments/assets/3c765704-7c88-442f-9d07-c4876d141f1a" />
 <img width="776" height="802" alt="изображение" src="https://github.com/user-attachments/assets/c3bb344c-6166-4e60-9a8d-896d5dc7f1e0" />
