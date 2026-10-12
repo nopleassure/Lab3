@@ -143,3 +143,66 @@ void saveToFile(const Cargo* arr, int count)
     fout.close();
     cout << "Данные сохранены в файл: " << filename << endl;
 }
+
+int main()
+{
+    Cargo* database = NULL;
+    int recordCount = 0;
+    int choice = 0;
+
+    do
+    {
+        cout << "\n=== МЕНЮ УПРАВЛЕНИЯ ===\n";
+        cout << "1. Чтение данных из файла в динамический массив\n";
+        cout << "2. Просмотр данных\n";
+        cout << "3. Корректировка данных строки\n";
+        cout << "4. Вычисления\n";
+        cout << "5. Сохранение данных в новом файле\n";
+        cout << "0. Выход\n";
+        cout << "Выберите пункт: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+            {
+                char filename[100];
+                cout << "Введите имя файла для чтения: ";
+                cin >> filename;
+
+                if (database != NULL) 
+                {
+                    delete[] database;
+                }
+                database = readFromFile(filename, recordCount);
+                break;
+            }
+            case 2:
+                printDatabase(database, recordCount);
+                break;
+            case 3:
+                editRecord(database, recordCount);
+                break;
+            case 4:
+                calcstats(database, recordCount);
+                break;
+            case 5:
+                saveToFile(database, recordCount);
+                break;
+            case 0:
+                cout << "Завершение программы..." << endl;
+                break;
+            default:
+                cout << "Неверный пункт меню" << endl;
+        }
+    } 
+    while (choice != 0);
+
+    if (database != NULL) 
+    {
+        delete[] database;
+        database = NULL;
+    }
+
+    return 0;
+}
