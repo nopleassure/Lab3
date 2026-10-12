@@ -50,3 +50,96 @@ Cargo* readFromFile(const char* filename, int& count)
         return NULL;
     }
 }
+
+void printDatabase(const Cargo* arr, int count) {
+    cout << "\n--- СПИСОК ГРУЗОВ ---\n";
+    cout << "ID\tНазвание\tОткуда\t\tКуда\t\tКм\tВес\tЦена\n";
+    cout << "-------------------------------------------------------------\n";
+
+    for (int i = 0; i < count; i++) {
+        cout << arr[i].id << "\t" 
+             << arr[i].cargo_name << "\t\t" 
+             << arr[i].departure << "\t\t" 
+             << arr[i].destination << "\t\t" 
+             << arr[i].distance << "\t" 
+             << arr[i].weight << "\t" 
+             << arr[i].price << endl;
+    }
+    cout << "-------------------------------------------------------------\n";
+}
+
+void editRecord(Cargo* arr, int count) {
+    int target_id;
+    cout << "Введите ID записи для редактирования: ";
+    cin >> target_id;
+
+    int index = -1;
+    for (int i = 0; i < count; i++) {
+        if (arr[i].id == target_id) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1) {
+        cout << "Введите новое наименование груза: ";
+        cin >> arr[index].cargo_name;
+        cout << "Введите новый город отправления: ";
+        cin >> arr[index].departure;
+        cout << "Введите новый город назначения: ";
+        cin >> arr[index].destination;
+        cout << "Введите новое расстояние (км): ";
+        cin >> arr[index].distance;
+        cout << "Введите новый вес (тонны): ";
+        cin >> arr[index].weight;
+        cout << "Введите новую стоимость (руб): ";
+        cin >> arr[index].price;
+        cout << "Данные изменены\n";
+    } else {
+        cout << "Запись с таким ID не найдена" << endl;
+    }
+}
+
+void calcstats(const Cargo* arr, int count) {
+    double total_weight = 0.0;
+    double total_price = 0.0;
+    int total_distance = 0;
+
+    for (int i = 0; i < count; i++) {
+        total_weight += arr[i].weight;
+        total_price += arr[i].price;
+        total_distance += arr[i].distance;
+    }
+
+    double avg_price = total_price / count;
+
+    cout << "\n--- РЕЗУЛЬТАТЫ ВЫЧИСЛЕНИЙ ---\n";
+    cout << "Общее количество записей: " << count << endl;
+    cout << "Суммарный вес грузов:     " << total_weight << " т\n";
+    cout << "Общая стоимость перевозок: " << total_price << " руб.\n";
+    cout << "Средняя стоимость рейса:   " << avg_price << " руб.\n";
+    cout << "-----------------------------\n";
+}
+
+void saveToFile(const Cargo* arr, int count)
+{
+    char filename[100];
+    cout << "Введите имя нового файла для сохранения: ";
+    cin >> filename;
+
+    ofstream fout;
+    fout.open(filename);
+    for (int i = 0; i < count; i++)
+    {
+        fout << arr[i].id << " "
+             << arr[i].cargo_name << " "
+             << arr[i].departure << " "
+             << arr[i].destination << " "
+             << arr[i].distance << " "
+             << arr[i].weight << " "
+             << arr[i].price << "\n";
+    }
+
+    fout.close();
+    cout << "Данные сохранены в файл: " << filename << endl;
+}
